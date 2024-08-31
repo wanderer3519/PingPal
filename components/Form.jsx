@@ -1,7 +1,12 @@
+"use client";
+
+import { signIn } from 'next-auth/react';
 import { EmailOutlined, LockClockOutlined, PersonOutline } from '@mui/icons-material'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation';
+// import React from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast';
 
 const Form = ({ type }) => {
   const {
@@ -9,46 +14,108 @@ const Form = ({ type }) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useFormm();
+  } = useForm();
+
+  const router = useRouter();
+
+  const onSubmit = async (data) => {
+    if(type === 'register') {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      if(response.ok) {
+        router.push('/');
+      }
+
+      if(response.error){
+        toast.error('An error occurred, please try again');
+      }
+    }
+
+    if(type === 'login'){
+      const resp = await signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
+
+      if(resp.ok) {
+        router.push('/chats');
+      }
+
+      if(resp.error){
+        toast.error('Invalid email or password here');
+      }
+    }
+  };
 
   return (
     <div className='auth'>
       <div className="content">
         <img src="/assets/logo.png" alt="logo" className='logo' />
 
-        <form className='form'>
+        <form className='form' onSubmit={handleSubmit(onSubmit)}>
           {type === 'register' && (
-            <div className='input'>
-              <input {...register("username", {
-                required: "username is required", 
-                validate: (value) => {
-                  if (value.length < 3) {
-                    return 'username must be at least 3 characters'
+            <div>
+              <div className='input'>
+                <input
+                defaultValue="" 
+                {...register("username", {
+                  required: "username is required", 
+                  validate: (value) => {
+                    if (value.length < 3) {
+                      return 'username must be at least 3 characters'
+                    }
                   }
-                }
-              })} type='text' placeholder='Username' className='input-field' />
-              <PersonOutline sx={{ color: '#737373' }} />
+                })} type='text' placeholder='Username' className='input-field' />
+                <PersonOutline sx={{ color: '#737373' }} />
+              </div>
+              
+              {errors.username && (
+                <p className='text-red-500' > {errors.username.message} </p>
+              )}
             </div>
           )}
 
-          <div className='input'>
-            <input {...register("email", {
-              required: 'email is required',
-            })} type='text' placeholder='Email' className='input-field' />
-            <EmailOutlined sx={{ color: '#737373' }} />
+
+          <div>
+            <div className='input'>
+              <input 
+              defaultValue=""
+              {...register("email", {
+                required: 'email is required',
+              })} type='text' placeholder='Email' className='input-field' />
+              <EmailOutlined sx={{ color: '#737373' }} />
+            </div>
+
+            {errors.email && (
+              <p className='text-red-500' > {errors.email.message} </p>
+            )}
           </div>
 
-          <div className='input'>
-            <input {...register("password", {
-              required: 'password is required',
-              validate: (value) => {
-                if (value.length < 5 || !value.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/)) {
-                  return 'password must be at least 3 characters and contain a special character'
+          <div>
+            <div className='input'>
+              <input 
+              defaultValue=""
+              {...register("password", {
+                required: 'password is required',
+                validate: (value) => {
+                  if (value.length < 5 || !value.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/)) {
+                    return 'password must be at least 3 characters and contain a special character'
+                  }
                 }
-              }
-            })} 
-            type='password' placeholder='Password' className='input-field' />
-            <LockClockOutlined sx={{ color: '#737373' }} />
+              })} 
+              type='password' placeholder='Password' className='input-field' />
+              <LockClockOutlined sx={{ color: '#737373' }} />
+            </div>
+
+            {errors.password && (
+              <p className='text-red-500' > {errors.password.message} </p>
+            )}
           </div>
 
           <button className='button' type='submit' >

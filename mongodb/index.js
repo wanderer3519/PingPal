@@ -12,7 +12,7 @@ export const connectToDB = async () => {
 
     try{
         await mongoose.connect(process.env.MONGODB_URL, {
-            dbName: "Halo Chat",
+            dbName: "HaloChat",
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });

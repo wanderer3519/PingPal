@@ -1,3 +1,4 @@
+import User from "@models/User";
 import { connectToDB } from "@mongodb";
 import { hash } from "bcryptjs";
 
@@ -14,7 +15,7 @@ export const POST = async (req, res) => {
         }
 
         const hashedPassword = await hash(password, 10);
-        const newUser = new User({
+        const newUser = await User.create({
             username,
             email,
             password: hashedPassword,
