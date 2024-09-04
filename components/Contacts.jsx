@@ -22,10 +22,9 @@ const Contacts = () => {
       const data = await response.json();
 
       setContacts(data.filter(user => user._id !== currUser._id));
-
-      setContacts(data);
       setLoading(false);
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
     }
   }
@@ -117,7 +116,7 @@ const Contacts = () => {
                 <p className='text-body'> Members </p>
                 <div className='flex flex-wrap gap-3'>
                   {selectedContacts.map((contact, index) => (
-                    <p className='selected-contact'>
+                    <p className='selected-contact' key={index}>
                       {contact.username}
                     </p>
                   ))}
@@ -125,7 +124,7 @@ const Contacts = () => {
               </div>
             </>
           )}
-          <button className='btn' onClick={createChat}> Start new chat </button>
+          <button className='btn' onClick={createChat}> Find or Start new chat </button>
         </div>
       </div>
     </div>

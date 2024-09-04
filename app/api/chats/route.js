@@ -20,11 +20,14 @@ export const POST = async (req) => {
                 isGroup? query : { members: [currentUserId, ...members] }
             );
             await chat.save();
-            await User.findByIdAndUpdate(
-                currentUserId, 
-                { $addToSet: { chats: chat._id } },
-                { new: true }
-            );
+            const updateAllMembers = chat.members.map(async (memberId) => {
+                await User.findByIdAndUpdate(
+                    memberId, 
+                    { $addToSet: { chats: chat._id } },
+                    { new: true }
+                )
+            })
+            await Promise.all(updateAllMembers); 
         }
         
         console.log("New chat created: ", chat);
