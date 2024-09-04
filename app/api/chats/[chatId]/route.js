@@ -24,3 +24,29 @@ export const GET = async (req, { params }) => {
         return new Response("Internal server error: failed to fetch chat details", { status: 500 });
     }
 }
+
+export const POST = async (req, { params }) => {
+    try {
+        await connectToDB();
+        const body = await req.json();
+
+        const { chatId } = params;
+        const { currentUserId } = body;
+
+        await Message.updateMany(
+            { chat: chatId },
+            { $addToSet: { seenBy: currentUserId } },
+            { new: true }
+        ).populate({
+            path: "seen seenBy",
+            model: User,
+
+        });
+
+        return new Response("Seen all message by current user", { status: 200 });
+    } 
+    catch (error) {
+        console.log(error);
+        return new Response("Internal server error: failed to send message", { status: 500 });
+    }
+}
