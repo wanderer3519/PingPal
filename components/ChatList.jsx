@@ -38,7 +38,7 @@ const ChatList = ({ currentChatId }) => {
       onChange={(e) => setSearch(e.target.value)} />
 
       <div className='chats'>
-        {chats?.map((chat, index) => (<ChatBox chat={chat} index={index} currentUser={currentUser} 
+        {chats?.map((chat, index) => (<ChatBox chat={chat} key={index} currentUser={currentUser} 
         currentChatId={currentChatId} />))}
       </div>
     </div>
