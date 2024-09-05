@@ -5,7 +5,7 @@ import { GroupOutlined, PersonOutline } from '@mui/icons-material'
 import { useForm } from 'react-hook-form';
 import { CldUploadButton } from 'next-cloudinary';
 import Loader from '@components/Loader';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 const page = () => {
   const [loading, setLoading] = useState(true);
@@ -43,6 +43,8 @@ const page = () => {
     setValue('groupPhoto', result?.info?.secure_url);
   }
 
+  const router = useRouter();
+
   const updateGroupChat = async (data) => {
     setLoading(true);
     try {
@@ -55,7 +57,9 @@ const page = () => {
       })
 
       setLoading(false);
-      window.location.reload();
+
+      if(response.ok)
+        router.push(`/chats/${chatId}`);
     }
     catch (error) {
       console.log(error);
