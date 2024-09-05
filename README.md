@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Personal details
+Name: Bhogaraju Shanmukha Sri Krishna
+University: Indian Institute of Technology, Palakkad
+Department: Computer Science and Engineering
+
+Find the design document <a href="./SystemDesignDocument.md">Here</a>
+
+I have pushed the system design document to the repo as a markdown in the same directory. Please check it
+
+## How to run 
+Also check the <a href="./SystemDesignDocument.md">The design document</a> for more details
+1. Login to atlas mongo db
+2. Setup a new database user and connect to the data.
+3. Go to connect, copy the mongodb URL and 

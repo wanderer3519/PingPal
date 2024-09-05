@@ -63,7 +63,8 @@ const ChatList = ({ currentChatId }) => {
 
   return loading ? <Loader /> : (
     <div className='chat-list'>
-      <input type="text" placeholder='search a chat...' className='input-search' value={search} 
+      
+      <input type="text" placeholder='Search a chat...' className='input-search' value={search} 
       onChange={(e) => setSearch(e.target.value)} />
 
       <div className='chats'>

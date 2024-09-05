@@ -1,5 +1,10 @@
+/**
+ * This model represents a chat in the database.
+ */
+
 import mongoose from "mongoose";
 
+// Create a schema for the chat
 const ChatSchema = new mongoose.Schema({
     members: {
         type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
@@ -31,5 +36,6 @@ const ChatSchema = new mongoose.Schema({
     },
 });
 
+// If there is an existing chat model, use it. Otherwise, create a new one
 const Chat = mongoose.models.Chat || mongoose.model('Chat', ChatSchema);
 export default Chat;

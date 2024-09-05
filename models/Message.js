@@ -1,5 +1,10 @@
+/**
+ * This model represents a message in the database.
+ */
+
 import mongoose from "mongoose";
 
+// Designing a schema for the message
 const MessageSchema = new mongoose.Schema({
     chat: {
         type: mongoose.Schema.Types.ObjectId,
@@ -27,5 +32,7 @@ const MessageSchema = new mongoose.Schema({
     }
 })
 
+// If there is an existing message model, use it. Otherwise, create a new one
 const Message = mongoose.models.Message || mongoose.model("Message", MessageSchema);
+
 export default Message;

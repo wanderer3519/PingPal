@@ -1,3 +1,12 @@
+/*
+  The global design system for the application.
+  Main aspects include:
+  1. TailwindCSS utilities
+  2. Custom scrollbar
+  3. Custom styles for each className
+*/
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

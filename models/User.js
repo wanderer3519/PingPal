@@ -1,5 +1,10 @@
+/**
+ * This model represents a user in the database.
+ */
+
 import mongoose from "mongoose";
 
+// Designing a schema for the user
 const UserSchema = new mongoose.Schema({
     username:{
         type: String,
@@ -27,6 +32,7 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
+// If there is an existing user model, use it. Otherwise, create a new one
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
 export default User;

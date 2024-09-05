@@ -1,3 +1,7 @@
+/**
+ * This page is used to edit the group chat details
+ */
+
 "use client"
 
 import { useEffect, useState } from 'react'
@@ -8,6 +12,7 @@ import Loader from '@components/Loader';
 import { useParams, useRouter } from 'next/navigation';
 
 const page = () => {
+  // Set the loading state and get the chatId from the URL
   const [loading, setLoading] = useState(true);
   const [chat, setChat] = useState({});
 
@@ -15,23 +20,24 @@ const page = () => {
 
   const getChatDetails = async () => {
     try {
+      // Fetch the chat details
       const response = await fetch(`/api/chats/${chatId}`);
       const data = await response.json();
       setChat(data);
       setLoading(false);
 
+      // Update the form with the new details
       reset({
         name: data?.name,
         groupPhoto: data?.groupPhoto,
-
       })
-
     } 
     catch (error) {
       console.log(error);  
     }
   }
 
+  // Get the chat details if the chatId is available
   useEffect(() => {
     if (chatId)
       getChatDetails();
@@ -39,12 +45,15 @@ const page = () => {
 
   const { register, watch, setValue, handleSubmit, reset, formState: { error } } = useForm();
 
+  // upload the photo to cloudinary
   const uploadPhoto = (result) => {
     setValue('groupPhoto', result?.info?.secure_url);
   }
 
+  // using router
   const router = useRouter();
 
+  // Update the group chat details
   const updateGroupChat = async (data) => {
     setLoading(true);
     try {
@@ -66,11 +75,13 @@ const page = () => {
     }
   }
 
-
+  // Loading state
   return loading ? <Loader /> : (
+    // Edit group chat form
     <div className='profile-page'>
       <h1 className='text-heading3-bold'> Edit group info </h1>
 
+      {/* Form to edit the group chat details */}
       <form className='edit-profile' onSubmit={handleSubmit(updateGroupChat)}>
         <div className="input">
 

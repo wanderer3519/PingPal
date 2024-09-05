@@ -21,17 +21,29 @@ PingPal relies on the following dependencies and libraries:
 - Node.js: A JavaScript runtime environment for executing server-side code.
 - Express.js: A web application framework for Node.js.
 - MongoDB: A no SQL database made to keep the design intuitive.
+- Pusher: A real time library for nextjs.
+- Cloudinary: A image cloud library for react (nextjs).
 
 ## Setup and Running the Prototype
 Setup .env file:
 1. Start your own MongoDB server. If you are not registered, please do so by logging into the atlas page and 
 register.
-// Finish this 
+2. Start a database and connect to it.
+3. Setup an env file which must be similar to the one in the repo. (you can also update the same variables in the env file)
+4. Login to cloudinary and get your Cloud name
+5. The env should consist of the following variables:
+    MONGODB_URL={Your mongodb link}
+    NEXTAUTH_SECRET="SECRET KEY"
+    NEXTAUTH_URL=http://localhost:3000
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dpuf8uuwe
+    PUSHER_APP_ID="1860303"
+    NEXT_PUBLIC_PUSHER_APP_KEY="b7a8344efd1f696e4337"
+    PUSHER_SECRET="647164f8e9aeb807edad"
 
 
 To set up and run the PingPal prototype, follow these steps:
 
-1. Clone the PingPal repository from GitHub: `git clone https://github.com/your-username/pingpal.git`
+1. Clone the PingPal repository from GitHub: `git clone https://github.com/wanderer3519/PingPal.git`
 2. Navigate to the project directory: `cd pingpal`
 3. Install the dependencies: `npm install`
 4. Set up the MongoDB database and configure the connection details in the `.env` file.
@@ -43,3 +55,8 @@ Please note that additional steps may be required depending on your specific env
 
 ## Conclusion
 The system design document provides an overview of the PingPal application's architecture, dependencies, and libraries used. It also includes instructions on how to set up and run the prototype. By following these guidelines, you can easily understand the system design and get the PingPal application up and running.
+
+## References
+I have watched the following video in order to complete this assignment
+https://www.youtube.com/watch?v=2Zv8YYq1ymo
+

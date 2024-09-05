@@ -1,3 +1,6 @@
+/**
+ * File to provide the session to the app
+ */
 "use client";
 import { SessionProvider } from "next-auth/react"
 

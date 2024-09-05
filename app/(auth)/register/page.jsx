@@ -1,4 +1,6 @@
-// import React from 'react'
+/**
+ * This file is the Register page for the application
+ */
 import Form from "@components/Form"
 
 const Register = () => {

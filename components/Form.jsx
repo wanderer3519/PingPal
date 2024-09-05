@@ -1,10 +1,13 @@
+/**
+ * This component is used to render the form for both login and register of authentication
+ */
+
 "use client";
 
 import { signIn } from 'next-auth/react';
 import { EmailOutlined, LockClockOutlined, PersonOutline } from '@mui/icons-material'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-// import React from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast';
 
@@ -19,7 +22,9 @@ const Form = ({ type }) => {
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    if(type === 'register') {
+    if (type === 'register') {
+
+      // Post the data to the server
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
@@ -28,26 +33,27 @@ const Form = ({ type }) => {
         body: JSON.stringify(data)
       });
 
-      if(response.ok) {
+      if (response.ok) {
         router.push('/');
       }
 
-      if(response.error){
+      if (response.error) {
         toast.error('An error occurred, please try again');
       }
     }
 
-    if(type === 'login'){
+    // Get the sign in response (includes validation)
+    if (type === 'login') {
       const resp = await signIn('credentials', {
         ...data,
         redirect: false,
       });
 
-      if(resp.ok) {
+      if (resp.ok) {
         router.push('/chats');
       }
 
-      if(resp.error){
+      if (resp.error) {
         toast.error('Invalid email or password here');
       }
     }
@@ -58,37 +64,39 @@ const Form = ({ type }) => {
       <div className="content">
         <img src="/assets/pingpal.png" alt="logo" className='logo' />
 
+        {/* Form for register */}
         <form className='form' onSubmit={handleSubmit(onSubmit)}>
           {type === 'register' && (
             <div>
               <div className='input'>
                 <input
-                defaultValue="" 
-                {...register("username", {
-                  required: "username is required", 
-                  validate: (value) => {
-                    if (value.length < 3) {
-                      return 'username must be at least 3 characters'
+                  defaultValue=""
+                  {...register("username", {
+                    required: "username is required",
+                    validate: (value) => {
+                      if (value.length < 3) {
+                        return 'username must be at least 3 characters'
+                      }
                     }
-                  }
-                })} type='text' placeholder='Username' className='input-field' />
+                  })} type='text' placeholder='Username' className='input-field' />
                 <PersonOutline sx={{ color: '#737373' }} />
               </div>
-              
+
               {errors.username && (
                 <p className='text-red-500' > {errors.username.message} </p>
               )}
             </div>
           )}
 
-
+          {/* Login starts */}
+          {/* Email id validation */}
           <div>
             <div className='input'>
-              <input 
-              defaultValue=""
-              {...register("email", {
-                required: 'email is required',
-              })} type='text' placeholder='Email' className='input-field' />
+              <input
+                defaultValue=""
+                {...register("email", {
+                  required: 'email is required',
+                })} type='text' placeholder='Email' className='input-field' />
               <EmailOutlined sx={{ color: '#737373' }} />
             </div>
 
@@ -97,19 +105,20 @@ const Form = ({ type }) => {
             )}
           </div>
 
+          {/* Password validation */}
           <div>
             <div className='input'>
-              <input 
-              defaultValue=""
-              {...register("password", {
-                required: 'password is required',
-                validate: (value) => {
-                  if (value.length < 5 || !value.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/)) {
-                    return 'password must be at least 3 characters and contain a special character'
+              <input
+                defaultValue=""
+                {...register("password", {
+                  required: 'password is required',
+                  validate: (value) => {
+                    if (value.length < 5 || !value.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/)) {
+                      return 'password must be at least 3 characters and contain a special character'
+                    }
                   }
-                }
-              })} 
-              type='password' placeholder='Password' className='input-field' />
+                })}
+                type='password' placeholder='Password' className='input-field' />
               <LockClockOutlined sx={{ color: '#737373' }} />
             </div>
 
@@ -124,6 +133,7 @@ const Form = ({ type }) => {
 
         </form>
 
+        {/* Link to switch between login and register */}
         {type === 'register' ? (
           <Link href="/" className='link' >
             <p className='text-center' > Already have an account? Sign in Here </p>

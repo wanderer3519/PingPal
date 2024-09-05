@@ -1,3 +1,9 @@
+/**
+ * Authentication route: /api/auth
+ * Uses next-auth to authenticate users
+ * This was taken from the next-auth documentation
+ */
+
 import User from "@models/User";
 import { connectToDB } from "@mongodb";
 import NextAuth from "next-auth";

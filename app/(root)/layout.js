@@ -1,7 +1,12 @@
+/**
+ * The base layout for all pages after login
+ */
+
 import { Inter } from "next/font/google";
 import "../globals.css";
 import Provider from "@components/Provider";
 import TopBar from "@components/TopBar";
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,8 +16,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
-  // console.log(123);
+  // Skeleton layout for all pages
   return (
     <html lang="en">
       <body className={`${inter.className} bg-blue-2`}>
