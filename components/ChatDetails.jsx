@@ -148,10 +148,11 @@ const ChatDetails = ({ chatId }) => {
           <AddPhotoAlternate sx={{ fontSize: "35px", color: "#737373", cursor: "pointer", "&:hover": { color: "red" } }} />
           </CldUploadButton>
 
-          <input type="text" placeholder="Write a message..." className="input-field"
+          <input type="text" placeholder="Write a message..." className="input-field" style={{ width: "825px" }}
             value={text} onChange={e => setText(e.target.value)} required />
 
         </div>
+        
         <div>
           <img onClick={sendText} src="/assets/send.jpg" alt="send-msg" className="send-icon" />
         </div>

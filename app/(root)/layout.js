@@ -6,7 +6,7 @@ import TopBar from "@components/TopBar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Halo chat app",
+  title: "Ping Pal app",
   description: "A next js 14 chat app",
 };
 
