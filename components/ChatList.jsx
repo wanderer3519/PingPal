@@ -45,11 +45,18 @@ const ChatList = ({ currentChatId }) => {
           return chat;
         }));
       }
+
+      const handleNewChat = (newChat) => {
+        setChats((allChats) => [...allChats, newChat]);
+      }
+
       pusherClient.bind('update-chat', handleChatUpdate);
+      pusherClient.bind('new-chat', handleNewChat);
 
       return () => {
         pusherClient.unsubscribe(currentUser._id); 
         pusherClient.unbind('update-chat', handleChatUpdate);
+        pusherClient.unbind('new-chat', handleNewChat);
       }
     }
   }, [currentUser]);
