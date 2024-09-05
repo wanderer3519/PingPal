@@ -1,6 +1,8 @@
 import { connectToDB } from "@mongodb";
 import Message from "@models/Message";
 import Chat from "@models/Chat";
+import User from "@models/User";
+import { pusherServer } from "@lib/pusher";
 
 export const POST = async (req) => {
     try {
@@ -9,11 +11,13 @@ export const POST = async (req) => {
         const body = await req.json();
         const { chatId, currentUserId, text, photo } = body;
 
-        console.log(body);
+        // console.log(body);
+        const currentUser = await User.findById(currentUserId);
+
 
         const newMessage = await Message.create( {
             chat: chatId,
-            sender: currentUserId,
+            sender: currentUser,
             text,
             photo,
             seenBy: currentUserId
@@ -38,6 +42,25 @@ export const POST = async (req) => {
             model: "User",
         }).exec();
         
+
+        /* 
+            Trigger the new-message event on the chatId channel
+            and send the new message object as the data payload
+        */
+        await pusherServer.trigger(chatId, "new-message", newMessage);
+
+        const lastMessage = updatedChat.messages[updatedChat.messages.length - 1];
+        updatedChat.members.forEach(async member => {
+            try{
+                await pusherServer.trigger(member._id.toString(), "update-chat", {
+                    id: chatId,
+                    messages: [lastMessage]
+                });
+            }
+            catch(err){
+                console.log("Failed to trigger update-chat event");
+            }
+        });
 
         return new Response(JSON.stringify(updatedChat), { status: 200 });
     } catch (error) {
