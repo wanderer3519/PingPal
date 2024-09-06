@@ -29,9 +29,9 @@ Setup .env file:
 1. Start your own MongoDB server. If you are not registered, please do so by logging into the atlas page and 
 register.
 2. Start a database and connect to it.
-3. Setup an env file which must be similar to the one in the repo. (you can also update the same variables in the env file)
+3. Setup an env file which must be similar to the one in the repo. (you can also update the same variables in the env file) (This step can also be skipped)
 4. Login to cloudinary and get your Cloud name
-5. The env should consist of the following variables:
+5. The env should consist of the following variables (Replace the values with your custom ones):
     MONGODB_URL={Your mongodb link}
     NEXTAUTH_SECRET="SECRET KEY"
     NEXTAUTH_URL=http://localhost:3000

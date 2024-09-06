@@ -174,7 +174,7 @@ const ChatDetails = ({ chatId }) => {
           </CldUploadButton>
 
           {/* Input field for message */}
-          <input type="text" placeholder="Write a message..." className="input-field" style={{ width: "825px" }}
+          <input type="text" placeholder="Write a message..." className="input-field" style={{ width: "400%" }}
             value={text} onChange={e => setText(e.target.value)} required />
 
         </div>

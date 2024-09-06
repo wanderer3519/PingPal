@@ -19,7 +19,7 @@ export const POST = async (req) => {
         : { members: { $all: [currentUserId, ...members], $size: 2 } };
         
         // Find chat
-        const chat = await Chat.findOne(query);
+        let chat = await Chat.findOne(query);
         
         // If chat does not exist, create a new chat
         if(!chat){
