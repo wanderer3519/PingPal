@@ -174,14 +174,15 @@ const ChatDetails = ({ chatId }) => {
           </CldUploadButton>
 
           {/* Input field for message */}
-          <input type="text" placeholder="Write a message..." className="input-field" style={{ width: "400%" }}
+          <input type="text" placeholder="Write a message..." className="input-field" style={{ width: "825px" }}
             value={text} onChange={e => setText(e.target.value)} required />
 
         </div>
 
         {/* Send message icon */}
         <div>
-          <img onClick={sendText} src="/assets/send.jpg" alt="send-msg" className="send-icon" />
+          {/* <img onClick={sendText} src="/assets/send.jpg" alt="send-msg" className="send-icon" /> */}
+          <i className="fa-solid fa-paper-plane btn btn-lg" onClick={sendText}></i>
         </div>
 
       </div>
