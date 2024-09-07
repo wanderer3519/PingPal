@@ -1,3 +1,6 @@
+To run this, you need <a href="https://nodejs.org/en/download/package-manager"> node.js </a>
+After installing node.js, follow the next steps.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
