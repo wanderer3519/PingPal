@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { CldUploadButton } from "next-cloudinary";
 import MessageBox from "./MessageBox";
 import { pusherClient } from "@lib/pusher";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const ChatDetails = ({ chatId }) => {
   // Set the initial state of the chat details
@@ -174,7 +175,7 @@ const ChatDetails = ({ chatId }) => {
           </CldUploadButton>
 
           {/* Input field for message */}
-          <input type="text" placeholder="Write a message..." className="input-field" style={{ width: "825px" }}
+          <input type="text" placeholder="Write a message..." className="input-field"
             value={text} onChange={e => setText(e.target.value)} required />
 
         </div>
